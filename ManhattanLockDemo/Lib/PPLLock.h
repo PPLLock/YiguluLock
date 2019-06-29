@@ -105,6 +105,8 @@ typedef NS_ENUM(NSInteger, PPLLockError)
     PPLLockErrorAccessCloudFail = 1127,
     /** The parameter is empty */
     PPLLockErrorParamEmpty = 1128,
+    /** Password Type Error */
+    PPLLockErrorPasswordTypeError = 1129,
 };
 
 /*!
@@ -209,15 +211,19 @@ typedef NS_ENUM(NSInteger, KeyboardPsType)
  */
 - (void)didOnAutoLockingTime;
 
-/*! Informs the delegate that the lock was reset to factory settings.
+/*! Informs the delegate that the lock was reset to factory settings and all passwords will be cleared.
  
- * @discussion The previous admin of the lock is removed and the lock has no admin currently.
+ * @discussion Reset the binding state of the lock, the lock can be bound.
  */
 - (void)didOnResetLock;
 
 /*! Add User KeyBoard Password  Successfully
  */
 - (void)didOnAddUserKeyBoardPassword;
+
+/*! Delete User KeyBoard Password Successfully
+ */
+- (void)didOnDeleteUserKeyBoardPassword;
 
 /*! Password can be regenerated PPLAFter successful password reset
  */
@@ -416,6 +422,20 @@ typedef NS_ENUM(NSInteger, KeyboardPsType)
  */
 - (void)addKeyboardPassword_LockId:(NSString *)lockId accessToken:(NSString *)accessToken password:(NSString *)keyboardPs startDate:(NSDate*)startDate endDate:(NSDate*)endDate;
 
+/**
+ *  Delete a single keyboard passcode
+ 
+ @param  lockId ,returned when the lock is bound
+ @param  accessToken Call the API to get it by passing in AppKey and AppSecret
+ @param  keyboardPs KeyboardPassword range : 6 - 9 Digits in length
+ @param  passwordType  KeyboardPassword type{@see emum KeyboardPsType}
+ 
+ @see    didOnDeleteUserKeyBoardPassword.
+ @see    PLLError: command: errorMsg:.
+ */
+- (void)deleteOneKeyboardPassword_LockId:(NSString *)lockId accessToken:(NSString *)accessToken password:(NSString *)keyboardPs passwordType:(KeyboardPsType)passwordType;
+
+
 /** Reset keyboard Passcode
  
  @param lockId ,returned when the lock is bound
@@ -425,5 +445,7 @@ typedef NS_ENUM(NSInteger, KeyboardPsType)
  @see    PLLError: command: errorMsg:.
  */
 - (void)resetKeyboardPassword_LockId:(NSString *)lockId accessToken:(NSString *)accessToken;
+
+
 
 @end

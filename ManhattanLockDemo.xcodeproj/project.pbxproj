@@ -28,13 +28,13 @@
 		18CC3BCB21E6F43800855D1B /* MHLDeviceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CC3BC921E6F43800855D1B /* MHLDeviceTableViewController.xib */; };
 		18CC3BD121E6F49400855D1B /* MHLDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3BCF21E6F49400855D1B /* MHLDeviceCell.m */; };
 		18CC3BD221E6F49400855D1B /* MHLDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CC3BD021E6F49400855D1B /* MHLDeviceCell.xib */; };
-		18CDC14722BCB11700DBB0F4 /* libPPLLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CDC14622BCB11700DBB0F4 /* libPPLLock.a */; };
 		18DCC31C22B7C186009999EF /* MHLKeyboardPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DCC31A22B7C186009999EF /* MHLKeyboardPasswordController.m */; };
 		18DCC31D22B7C186009999EF /* MHLKeyboardPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DCC31B22B7C186009999EF /* MHLKeyboardPasswordController.xib */; };
 		18E1A6E721E97E0F002E0533 /* MHLDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E1A6E521E97E0F002E0533 /* MHLDemoViewController.m */; };
 		18E1A6E821E97E0F002E0533 /* MHLDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E1A6E621E97E0F002E0533 /* MHLDemoViewController.xib */; };
 		18EBD12D21E34D9000EDB3FC /* MHLNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBD12C21E34D9000EDB3FC /* MHLNetworkHelper.m */; };
 		18EBD13321E353A900EDB3FC /* MHLKeyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EBD13221E353A900EDB3FC /* MHLKeyModel.m */; };
+		18F786B322C76940007E7A97 /* libPPLLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F786B222C76940007E7A97 /* libPPLLock.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,8 +77,6 @@
 		18CC3BCE21E6F49400855D1B /* MHLDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHLDeviceCell.h; sourceTree = "<group>"; };
 		18CC3BCF21E6F49400855D1B /* MHLDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHLDeviceCell.m; sourceTree = "<group>"; };
 		18CC3BD021E6F49400855D1B /* MHLDeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MHLDeviceCell.xib; sourceTree = "<group>"; };
-		18CDC14522BCB11700DBB0F4 /* PPLLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLLock.h; sourceTree = "<group>"; };
-		18CDC14622BCB11700DBB0F4 /* libPPLLock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPPLLock.a; sourceTree = "<group>"; };
 		18DCC31922B7C186009999EF /* MHLKeyboardPasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHLKeyboardPasswordController.h; sourceTree = "<group>"; };
 		18DCC31A22B7C186009999EF /* MHLKeyboardPasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHLKeyboardPasswordController.m; sourceTree = "<group>"; };
 		18DCC31B22B7C186009999EF /* MHLKeyboardPasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MHLKeyboardPasswordController.xib; sourceTree = "<group>"; };
@@ -89,6 +87,8 @@
 		18EBD12C21E34D9000EDB3FC /* MHLNetworkHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHLNetworkHelper.m; sourceTree = "<group>"; };
 		18EBD13121E353A900EDB3FC /* MHLKeyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHLKeyModel.h; sourceTree = "<group>"; };
 		18EBD13221E353A900EDB3FC /* MHLKeyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHLKeyModel.m; sourceTree = "<group>"; };
+		18F786B122C76940007E7A97 /* PPLLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLLock.h; sourceTree = "<group>"; };
+		18F786B222C76940007E7A97 /* libPPLLock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPPLLock.a; sourceTree = "<group>"; };
 		552F10EF4DC6078C8900DDE0 /* Pods-ManhattanLockDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManhattanLockDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ManhattanLockDemo/Pods-ManhattanLockDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8BCD67729D6151BF93BFF984 /* Pods-ManhattanLockDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManhattanLockDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ManhattanLockDemo/Pods-ManhattanLockDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A949568AB5D153073A80841D /* libPods-ManhattanLockDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ManhattanLockDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18CDC14722BCB11700DBB0F4 /* libPPLLock.a in Frameworks */,
+				18F786B322C76940007E7A97 /* libPPLLock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +150,8 @@
 		1839B74521DF4CE20089BBA9 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				18CDC14622BCB11700DBB0F4 /* libPPLLock.a */,
-				18CDC14522BCB11700DBB0F4 /* PPLLock.h */,
+				18F786B222C76940007E7A97 /* libPPLLock.a */,
+				18F786B122C76940007E7A97 /* PPLLock.h */,
 			);
 			path = Lib;
 			sourceTree = "<group>";

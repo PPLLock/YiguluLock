@@ -1,10 +1,8 @@
-//
 //  MHLNetworkHelper.m
 //  ManhattanLockDemo
-//
 //  Created by Samuel on 2019/1/7.
 //  Copyright © 2019年 Populstay. All rights reserved.
-//
+
 
 #import "MHLNetworkHelper.h"
 #import "AFNetworking.h"
@@ -16,7 +14,7 @@
                               Handler:(void (^)(int code,NSString * data, NSError *error))handler
 {
     
-    NSString * requestUrl = @"https://open.zsmarting.cn/open/v1/auth/access-token/get";
+    NSString * requestUrl = @"http://mop.yigululock.com/open/v1/auth/access-token/get";
     
     AFHTTPSessionManager* afManager = [AFHTTPSessionManager manager];
     

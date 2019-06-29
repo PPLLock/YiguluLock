@@ -80,8 +80,6 @@ static  MHLLockHelper * instace;
     
     _bleBlockDict = [NSMutableDictionary dictionary];
     
-    [self.PPLObject startScan];
-    
     return self;
     
 }
@@ -89,7 +87,9 @@ static  MHLLockHelper * instace;
 - (void)PPLCenterManagerDidUpdateState:(PPLManagerState)state
 {
     if (state == PPLManagerStatePoweredOn) {
-        [_PPLObject stopScan];
+        
+        [self.PPLObject startScan];
+
     }else if (state == PPLManagerStatePoweredOff){
         [_PPLObject stopScan];
     }else if (state == PPLManagerStateUnsupported){
@@ -219,6 +219,28 @@ static  MHLLockHelper * instace;
     }
     
     [PPLObjectPPLLockHelper  addKeyboardPassword_LockId:key.lockId accessToken:key.accessToken password:newKeyboardPwd startDate:startDate endDate:endDate];
+}
+
++ (void)deleteKeyboardPwd:(NSString *)keyboadPs
+           keyboardPsType:(KeyboardPsType)type
+                      key:(MHLKeyModel *)key
+               complition:(BLEBlock)complition
+{
+    if (!key) {
+        
+        complition(NO,nil);
+        
+        return;
+    }
+    
+    if (complition) {
+        
+        
+        [[MHLLockHelper shareInstance].bleBlockDict setObject:complition forKey:PPLBLE_DELETEKEYBOARDPWD];
+        
+    }
+    
+    [PPLObjectPPLLockHelper  deleteOneKeyboardPassword_LockId:key.lockId accessToken:key.accessToken password:keyboadPs passwordType:type];
 }
 
 
@@ -529,14 +551,16 @@ static  MHLLockHelper * instace;
     
 }
 
-
 - (void)PLLError:(PPLLockError)error command:(int)command errorMsg:(NSString *)errorMsg
 {
     [SSToastHelper showToastWithStatus:errorMsg];
+    
     NSLog(@"%@",[NSString stringWithFormat:@"ERROR:%ld COMAND %d errorMsg%@",(long)error,command,errorMsg]);
     
     NSMutableDictionary *info = [NSMutableDictionary dictionary];
+    
     info[PPLBLEErrorCodeKey] = @(error);
+    
     info[PPLBLECommandKey] = @(command);
         
     [MHLLockHelper removeBlock:info untilExecute:YES];
@@ -546,6 +570,7 @@ static  MHLLockHelper * instace;
 + (void)removeBlock:(id)info untilExecute:(BOOL)execute{
     
     NSMutableDictionary *bleBlockDict = [[MHLLockHelper shareInstance].bleBlockDict copy];
+    
     [[MHLLockHelper shareInstance].bleBlockDict removeAllObjects];
     
     [bleBlockDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -555,7 +580,6 @@ static  MHLLockHelper * instace;
             
             connectBlock(NO,info);
             
-           
         }
     }];
 }

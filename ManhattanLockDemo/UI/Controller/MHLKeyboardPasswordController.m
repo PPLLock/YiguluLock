@@ -11,7 +11,7 @@
 #import "NSString+PPLTime.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface MHLKeyboardPasswordController ()
+@interface MHLKeyboardPasswordController ()<UITextFieldDelegate>
 {
     MHLLockHelper * _pplockHelper;
 }
@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *codeField;
 
 @property (weak, nonatomic) IBOutlet UILabel *codeLab;
+@property (weak, nonatomic) IBOutlet UITextField *deleteKeyboardPSField;
 
 
 @end
@@ -177,6 +178,65 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+- (IBAction)delete:(UIButton *)sender {
+    
+    [self.view endEditing:YES];
+    
+    NSString * code = self.deleteKeyboardPSField.text;
+    
+    if (code.length < 6 || code.length > 9) {
+        
+        [self showToast:LS(@"Password length error")];
+        
+        return;
+    }
+    
+    if (!_model) {
+        
+        [self showToast:@"Lock data is empty"];
+        
+        return;
+    }
+    
+    [MHLLockHelper connectKey:_model connectBlock:^(BOOL succeed, id info) {
+        
+        if (!succeed) {
+            
+            [SVProgressHUD dismiss];
+            
+            [self showLockNotNearToast];
+            
+            return;
+            
+        }
+        
+        [MHLLockHelper deleteKeyboardPwd:code keyboardPsType:KeyboardPsTypePermanent key:self->_model complition:^(BOOL succeed, id info) {
+            
+            [SVProgressHUD dismiss];
+            
+            if(!succeed) {
+                
+                [self showOperationFailedToast];
+                
+                return;
+            }
+            
+            
+            [self showToast:@"Deleted password successfully"];
+            
+        }];
+        
+    }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.view endEditing:YES];
+    
+    [self delete:nil];
+    
+    return YES;
 }
 
 @end

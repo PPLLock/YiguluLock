@@ -4,7 +4,6 @@
 //
 //  Created by Samuel on 2019/1/10.
 //  Copyright © 2019年 Populstay. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 
@@ -41,6 +40,11 @@ typedef void(^BLEBlock)(BOOL succeed,id info);
 + (void)customKeyboardPwd:(NSString *)newKeyboardPwd
                 startDate:(NSDate*)startDate
                   endDate:(NSDate*)endDate
+                      key:(MHLKeyModel *)key
+               complition:(BLEBlock)complition;
+
++ (void)deleteKeyboardPwd:(NSString *)keyboadPs
+           keyboardPsType:(KeyboardPsType)type
                       key:(MHLKeyModel *)key
                complition:(BLEBlock)complition;
 

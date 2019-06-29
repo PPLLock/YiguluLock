@@ -50,7 +50,7 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     
     [self setupTableView];
 
-    [self showHUD:LS(@"Searching for nearby locks...")];
+   
     
     //_accessToken = @"e38d392a04564d27655dec481384d99e";//服务器调平台接口获取，有效期30分钟，失效后需要重新调用该接口获取
     
@@ -64,7 +64,9 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     
     PPLObjectPPLLockHelper.delegate = self;
     
-    [PPLObjectPPLLockHelper startScan];
+    [PPLObjectPPLLockHelper setupBluetooth];
+    
+    //[PPLObjectPPLLockHelper startScan];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -180,6 +182,23 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     
 }
 
+- (void)PPLCenterManagerDidUpdateState:(PPLManagerState)state
+{
+    if (state == PPLManagerStatePoweredOn) {
+        
+        [self showHUD:LS(@"Searching for nearby locks...")];
+        
+        [PPLObjectPPLLockHelper startScan];
+    
+    }else if(state == PPLManagerStatePoweredOff){
+        
+        [self hideHUD];
+        
+        [self showToast:@"Please turn on your phone Bluetooth first."];
+        
+    }
+}
+
 - (void)didFindPeripheral:(CBPeripheral *)peripheral lockName:(NSString *)lockName mac:(NSString *)mac hasBind:(BOOL)hasBind
 {
   
@@ -258,7 +277,7 @@ static  NSString * lockDeviceCellID = @"deviceCell";
 
 - (void)PLLError:(PPLLockError)error command:(int)command errorMsg:(NSString *)errorMsg
 {
-    [self hideHUD];
+    
     
     NSLog(@"error = %ld",(long)error);
     
@@ -267,8 +286,23 @@ static  NSString * lockDeviceCellID = @"deviceCell";
         [self hideHUD];
         
         [self showOperationFailedToast];
+        
+        return;
     
     }
+    
+    if (error == PPLLockErrorAccessTokenError) {
+        
+        [self hideHUD];
+        
+        [self showToast:@"Token timeout or invalid"];
+        
+        return;
+        
+        
+    }
+    
+    [self hideHUD];
 }
 
 #pragma mark ---- 初始化成功
