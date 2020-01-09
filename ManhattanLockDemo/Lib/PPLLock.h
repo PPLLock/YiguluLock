@@ -13,7 +13,6 @@
  *  @enum PPLManagerState
  *
  *  @discussion Represents the current state of a Manager.
- *
  *  @constant PPLManagerStateUnknown       State unknown, update imminent.
  *  @constant PPLManagerStateResetting     The connection with the system service was momentarily lost, update imminent.
  *  @constant PPLManagerStateUnsupported   The platform doesn't support the Bluetooth Low Energy Central/Client role.
@@ -107,6 +106,9 @@ typedef NS_ENUM(NSInteger, PPLLockError)
     PPLLockErrorParamEmpty = 1128,
     /** Password Type Error */
     PPLLockErrorPasswordTypeError = 1129,
+    
+    /** Enter Firmware Update fail */
+    PPLLockErrorEnterFirewareUpdateFail  = 1130,
 };
 
 /*!
@@ -229,8 +231,12 @@ typedef NS_ENUM(NSInteger, KeyboardPsType)
  */
 - (void)didOnResetKeyboardPassword;
 
-/*! This method is invoked when the lock returns an error
+/*! Enter firmware upgrade status
+ */
+- (void)didOnEnterFirmwareUpdate;
 
+/*! This method is invoked when the lock returns an error
+ 
   @param error     error code
   @param command   command value
   @param errorMsg  Error description
@@ -446,6 +452,16 @@ typedef NS_ENUM(NSInteger, KeyboardPsType)
  */
 - (void)resetKeyboardPassword_LockId:(NSString *)lockId accessToken:(NSString *)accessToken;
 
+
+/** Put device into firmware upgrade state
+ 
+ @param lockId ,returned when the lock is bound
+ @param accessToken Call the API to get it by passing in AppKey and AppSecret
+ 
+ @see    didOnEnterFirmwareUpdate.
+ @see    PLLError: command: errorMsg:.
+ */
+- (void)enterFirmWareUpgarde_LockId:(NSString *)lockId accessToken:(NSString *)accessToken;
 
 
 @end

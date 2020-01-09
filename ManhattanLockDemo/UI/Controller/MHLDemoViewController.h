@@ -10,9 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol MHLDemoDelegate <NSObject>
+
+- (void)resetLockSuccess;
+
+@end
+
 @interface MHLDemoViewController : UIViewController
 
 @property (strong, nonatomic) MHLKeyModel * model;
+
+@property (weak, nonatomic) id <MHLDemoDelegate>delegate;
 
 @end
 

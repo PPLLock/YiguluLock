@@ -7,18 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface MHLKeyModel : NSObject
+@interface MHLKeyModel : RLMObject
+
+@property NSString *uuid;//主键id
 
 @property (strong, nonatomic)NSString * lockId;
-
 
 @property (strong, nonatomic)NSString * accessToken;
 
 @property (strong, nonatomic)NSString * name;
 
 @property (strong, nonatomic)NSString * mac;
-
 
 @property (assign, nonatomic)NSString * timestamp;
 

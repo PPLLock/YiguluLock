@@ -91,7 +91,9 @@ static  MHLLockHelper * instace;
         [self.PPLObject startScan];
 
     }else if (state == PPLManagerStatePoweredOff){
+        
         [_PPLObject stopScan];
+        
     }else if (state == PPLManagerStateUnsupported){
         
         NSLog(@"Your device does not support ble4.0, unable to use our app.");

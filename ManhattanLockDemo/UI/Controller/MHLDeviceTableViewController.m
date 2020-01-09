@@ -11,14 +11,17 @@
 #import "MHLDeviceCell.h"
 #import "MHLDemoViewController.h"
 #import "MHLNetworkHelper.h"
+#import "MHLKeyModel.h"
 
 #define  AppKey @"1bf83dg4311e7"
 
 #define  Appsecret @"1fcddfd2057aef80647221b01e82c62e8e8b77ef"
 
+#define TokenKey @"token"
 
 
-@interface MHLDeviceTableViewController ()<PPLLockDelegate>
+
+@interface MHLDeviceTableViewController ()<PPLLockDelegate,MHLDemoDelegate>
 {
     MHLOnFoundDeviceModel * _selectModel;
     
@@ -65,32 +68,49 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     PPLObjectPPLLockHelper.delegate = self;
     
     [PPLObjectPPLLockHelper setupBluetooth];
-    
-    //[PPLObjectPPLLockHelper startScan];
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self getAccessToken];
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString * token = [defaults objectForKey:TokenKey];
+    
+    _accessToken = token;
+    
+    if (!token) {
+        
+        [self getAccessToken];
+    }
+    
+   
 }
 
 - (void)demoAction
 {
-//    PPLDemoViewController * demoVC = [[PPLDemoViewController alloc] init];
-//
-//    PPLKeyModel * keyModel = [[PPLKeyModel alloc] init];
-//
-//    keyModel.accessToken = @"c44300c2f21e4b6ad96dcfe0d92b1e69";
-//
-//    keyModel.lockId = @"8bwi2ielb96";
-//
-//    keyModel.name = @"PPL-4857";
-//
-//    demoVC.model = keyModel;
-//
-//    [self.navigationController pushViewController:demoVC animated:YES];
+
+    MHLDemoViewController * demoVC = [[MHLDemoViewController alloc] init];
+    
+    RLMResults * locks = [MHLKeyModel allObjects];
+    
+    if (locks.count) {
+        
+        demoVC.model = [locks lastObject];
+        
+    }else {
+        
+        [self showToast:@"No lock data"];
+        
+        return;
+    
+    }
+    
+    demoVC.delegate = self;
+    
+    [self.navigationController pushViewController:demoVC animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -140,14 +160,43 @@ static  NSString * lockDeviceCellID = @"deviceCell";
         
     }else {
         
-        cell.addImageV.hidden = NO;
+        RLMResults * locks = [MHLKeyModel allObjects];
         
-        cell.nameLab.textColor = [UIColor blackColor];
+        if (locks.count) {
+            
+            MHLKeyModel * model = [locks lastObject];
+            
+            if ([model.name isEqualToString:blueModel.blueName]) {
+               
+                cell.addImageV.hidden = YES;
+                
+                cell.nameLab.textColor = [UIColor lightGrayColor];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+            }else {
+              
+                cell.addImageV.hidden = NO;
+                
+                cell.nameLab.textColor = [UIColor blackColor];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                
+            }
+            
+        }else {
+          
+            
+            cell.addImageV.hidden = NO;
+            
+            cell.nameLab.textColor = [UIColor blackColor];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            
+        }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
-   
-    
+
     return  cell;
 }
 
@@ -202,7 +251,6 @@ static  NSString * lockDeviceCellID = @"deviceCell";
 - (void)didFindPeripheral:(CBPeripheral *)peripheral lockName:(NSString *)lockName mac:(NSString *)mac hasBind:(BOOL)hasBind
 {
   
-    
     NSInteger perpheralIndex = -1 ;
     
     NSInteger count = self.blueListArr.count;
@@ -270,6 +318,12 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     if (_accessToken) {
         
         [PPLObjectPPLLockHelper lockInitializeWithToken:_accessToken];
+    
+    }else {
+        
+        [self hideHUD];
+        
+        [self showToast:@"Token timeout or invalid"];
     }
     
     
@@ -340,11 +394,24 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     
     keyModel.lockId = lockDic[@"lockId"];
     
+    keyModel.uuid = lockDic[@"lockId"];
+    
+
     MHLDemoViewController  * demoVC = [[MHLDemoViewController alloc] init];
     
     NSLog(@"lockId = %@ &&& accessToken = %@",keyModel.lockId,keyModel.accessToken);
     
     demoVC.model = keyModel;
+    
+    RLMRealm * realm = [RLMRealm defaultRealm];
+    
+    [realm beginWriteTransaction];
+    
+    [MHLKeyModel createOrUpdateInRealm:realm withValue:keyModel];
+    
+    [realm commitWriteTransaction];
+    
+    demoVC.delegate = self;
     
     [self.navigationController pushViewController:demoVC animated:YES];
     
@@ -360,11 +427,24 @@ static  NSString * lockDeviceCellID = @"deviceCell";
             if (data && ![data isKindOfClass:[NSNull class]]) {
                 
                 self->_accessToken = data;
+                
+                NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+                
+                [defaults setObject:data forKey:TokenKey];
+                
+                [defaults synchronize];
             }
             
         }
             
     }];
+}
+
+- (void)resetLockSuccess
+{
+    PPLObjectPPLLockHelper.delegate = self;
+    
+    [PPLObjectPPLLockHelper setupBluetooth];
 }
 
 

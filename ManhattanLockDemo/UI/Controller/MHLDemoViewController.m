@@ -9,6 +9,8 @@
 #import "MHLKeyboardPasswordController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
+#define TokenKey @"token"
+
 @interface MHLDemoViewController ()
 @end
 
@@ -28,6 +30,28 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Password" style:UIBarButtonItemStyleDone target:self action:@selector(keyboardPwdAction)];
 
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    PPLObjectPPLLockHelper.delegate = PPLLockHelperClass;
+    
+    [PPLObjectPPLLockHelper startScan];
+    
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+//    PPLObjectPPLLockHelper.delegate = nil;
+//
+//    [PPLObjectPPLLockHelper stopScan];
+    
+}
+
 
 - (IBAction)unlock:(UIButton *)sender {
     
@@ -299,7 +323,34 @@
                 
                 if (succeed) {
                     
+                    NSString * pred = [NSString stringWithFormat:@"lockId = \"%@\"",_model.lockId];
+                    
+                    RLMResults * locks = [MHLKeyModel objectsWhere:pred];
+                    
+                    RLMRealm * realm = [RLMRealm defaultRealm];
+                    
+                    if (locks.count) {
+                        
+                        [realm beginWriteTransaction];
+                        
+                        [realm deleteObject:[locks lastObject]];
+                        
+                        [realm commitWriteTransaction];
+                        
+                    }
+                    
+                    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+                    
+                    [defaults removeObjectForKey:TokenKey];
+                    
+                    [defaults synchronize];
+                    
                     [self showOperationSuccessToast];
+                    
+                    if ([self.delegate respondsToSelector:@selector(resetLockSuccess)]) {
+                        
+                        [self.delegate resetLockSuccess];
+                    }
                     
                     [self.navigationController popViewControllerAnimated:YES];
                     
