@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1811DEEF23C72C6F00CF7625 /* libPPLLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1811DEEE23C72C6F00CF7625 /* libPPLLock.a */; };
 		1839B73121DF4C7C0089BBA9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839B73021DF4C7C0089BBA9 /* AppDelegate.m */; };
 		1839B73421DF4C7C0089BBA9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839B73321DF4C7C0089BBA9 /* ViewController.m */; };
 		1839B73721DF4C7C0089BBA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1839B73521DF4C7C0089BBA9 /* Main.storyboard */; };
@@ -29,6 +28,7 @@
 		18CC3BCB21E6F43800855D1B /* MHLDeviceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CC3BC921E6F43800855D1B /* MHLDeviceTableViewController.xib */; };
 		18CC3BD121E6F49400855D1B /* MHLDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3BCF21E6F49400855D1B /* MHLDeviceCell.m */; };
 		18CC3BD221E6F49400855D1B /* MHLDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CC3BD021E6F49400855D1B /* MHLDeviceCell.xib */; };
+		18CED3CC252EB0030087DA9F /* libPPLLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CED3CB252EB0030087DA9F /* libPPLLock.a */; };
 		18DCC31C22B7C186009999EF /* MHLKeyboardPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DCC31A22B7C186009999EF /* MHLKeyboardPasswordController.m */; };
 		18DCC31D22B7C186009999EF /* MHLKeyboardPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DCC31B22B7C186009999EF /* MHLKeyboardPasswordController.xib */; };
 		18E1A6E721E97E0F002E0533 /* MHLDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E1A6E521E97E0F002E0533 /* MHLDemoViewController.m */; };
@@ -39,8 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1811DEED23C72C6F00CF7625 /* PPLLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPLLock.h; sourceTree = "<group>"; };
-		1811DEEE23C72C6F00CF7625 /* libPPLLock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPPLLock.a; sourceTree = "<group>"; };
 		1839B72C21DF4C7C0089BBA9 /* ManhattanLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManhattanLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1839B72F21DF4C7C0089BBA9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1839B73021DF4C7C0089BBA9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,6 +78,8 @@
 		18CC3BCE21E6F49400855D1B /* MHLDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHLDeviceCell.h; sourceTree = "<group>"; };
 		18CC3BCF21E6F49400855D1B /* MHLDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHLDeviceCell.m; sourceTree = "<group>"; };
 		18CC3BD021E6F49400855D1B /* MHLDeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MHLDeviceCell.xib; sourceTree = "<group>"; };
+		18CED3CA252EB0030087DA9F /* PPLLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPLLock.h; path = ../../../../Test/PPLLock.h; sourceTree = "<group>"; };
+		18CED3CB252EB0030087DA9F /* libPPLLock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPPLLock.a; path = ../../../../Test/libPPLLock.a; sourceTree = "<group>"; };
 		18DCC31922B7C186009999EF /* MHLKeyboardPasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHLKeyboardPasswordController.h; sourceTree = "<group>"; };
 		18DCC31A22B7C186009999EF /* MHLKeyboardPasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHLKeyboardPasswordController.m; sourceTree = "<group>"; };
 		18DCC31B22B7C186009999EF /* MHLKeyboardPasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MHLKeyboardPasswordController.xib; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BB6C2C1003351EE1928A9E4 /* libPods-ManhattanLockDemo.a in Frameworks */,
-				1811DEEF23C72C6F00CF7625 /* libPPLLock.a in Frameworks */,
+				18CED3CC252EB0030087DA9F /* libPPLLock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,8 +152,8 @@
 		1839B74521DF4CE20089BBA9 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				1811DEEE23C72C6F00CF7625 /* libPPLLock.a */,
-				1811DEED23C72C6F00CF7625 /* PPLLock.h */,
+				18CED3CB252EB0030087DA9F /* libPPLLock.a */,
+				18CED3CA252EB0030087DA9F /* PPLLock.h */,
 			);
 			path = Lib;
 			sourceTree = "<group>";

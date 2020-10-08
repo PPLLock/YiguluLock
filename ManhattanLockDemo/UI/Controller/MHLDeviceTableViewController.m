@@ -13,9 +13,9 @@
 #import "MHLNetworkHelper.h"
 #import "MHLKeyModel.h"
 
-#define  AppKey @"1bf83dg4311e7"
+#define  AppKey    @"1083jf71h3f3e7" //@"1bf83dg4311e7"
 
-#define  Appsecret @"1fcddfd2057aef80647221b01e82c62e8e8b77ef"
+#define  Appsecret @"1fcddfd2057aef80647221b01e82c62e5c3a00f3"//@"1fcddfd2057aef80647221b01e82c62e8e8b77ef"
 
 #define TokenKey @"token"
 
@@ -396,7 +396,6 @@ static  NSString * lockDeviceCellID = @"deviceCell";
     
     keyModel.uuid = lockDic[@"lockId"];
     
-
     MHLDemoViewController  * demoVC = [[MHLDemoViewController alloc] init];
     
     NSLog(@"lockId = %@ &&& accessToken = %@",keyModel.lockId,keyModel.accessToken);
@@ -426,7 +425,7 @@ static  NSString * lockDeviceCellID = @"deviceCell";
             
             if (data && ![data isKindOfClass:[NSNull class]]) {
                 
-                self->_accessToken = data;
+                _accessToken = data;
                 
                 NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
                 
